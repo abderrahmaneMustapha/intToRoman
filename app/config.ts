@@ -9,7 +9,7 @@ const cors = {
   maxAge: 3600
 };
 
-const port =  4200 || process.env.PORT
+const port =  process.env.PORT || 4200
 
 export default Object.freeze({
   cors,
