@@ -154,3 +154,43 @@ describe("Complex test cases", () => {
       expect(intToRoman(httpRequest)).toEqual("LXVI")
     })
 })
+
+describe("Cases where exceptions are thrown", () => {
+  test("Should throw an exception becease 0 is not support in Roman numerals", () => {
+    const httpRequest =  {
+      query:  {
+        number: "0"
+      }
+    }
+    expect(() => intToRoman(httpRequest)).toThrowError('Number must be between 0 and 100')
+  })
+
+  test("Should throw an exception when number is higher than 100", () => {
+    const httpRequest =  {
+      query:  {
+        number: "101"
+      }
+    }
+
+    expect(() => intToRoman(httpRequest)).toThrowError('Number must be between 0 and 100')
+  })
+
+  test("Should throw an exception when number does not exist in the query", () => {
+    const httpRequest =  {
+      query:  {
+      }
+    }
+
+    expect(() => intToRoman(httpRequest)).toThrowError('Number is missing')
+  })
+
+  test("Should throw an exception when number contain other characters", () => {
+    const httpRequest =  {
+      query:  {
+        number: "213azez33eazza333"
+      }
+    }
+
+    expect(() => intToRoman(httpRequest)).toThrowError('Query must be a number')
+  })
+})

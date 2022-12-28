@@ -1,0 +1,79 @@
+<html>
+  <head>
+    <title>Integer To Roman Number Convertion</title>
+  </head>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h3 {
+      margin-bottom: 2em;
+    }
+    input, button {
+      height: 2em;
+    }
+    input {
+      width: 200px;
+      margin-inline: 1em;
+    }
+    #input-container{
+      display: flex;
+      flex-wrap: nowrap;
+    }
+    #result {
+      margin: 2em;
+      font-size: 2em;
+      font-weight: bold;
+    }
+  </style>
+  <body>
+
+    <h3>
+      You want to convert a number more than 100 ? sorry we dont do this
+      here :(
+    </h3>
+    <form submit="submit(e)">
+      <div id="input-container">
+        <label for="number">
+          Number:
+        </label>
+        <input
+          name="number"
+          type="number"
+          min="0"
+          max="100"
+          required
+          placeholder="please write your number here"
+        />
+      </div>
+
+      <button type="submit">send</button>
+    </form>
+    <div id="result">
+
+    </div>
+   <script>
+      const form = document.getElementsByTagName("form")[0]
+      const result = document.getElementById("result")
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        fetch('/convertion?number='+e.target[0].value)
+        .then(res => res.json())
+        .then((data) => {
+          if (data.success === false) {
+            result.innerText = data.error.description
+          }
+          if(data.data && data.success == true) {
+            result.innerText = "The roman number is: "+data.data
+          }
+        })
+        .catch((e) => {
+          result.innerText = e.message
+        })
+      })
+    </script>
+  </body>
+</html>
