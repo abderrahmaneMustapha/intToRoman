@@ -89,3 +89,68 @@ describe("Basic test cases", () => {
     expect(intToRoman(httpRequest)).toEqual("C")
   })
 })
+
+describe("Complex test cases", () => {
+    test("Should return II", () => {
+      const httpRequest =  {
+        query:  {
+          number: "2"
+        }
+      }
+      expect(intToRoman(httpRequest)).toEqual("II")
+    })
+
+    test("Should return XVIII", () => {
+      const httpRequest =  {
+        query:  {
+          number: "18"
+        }
+      }
+      expect(intToRoman(httpRequest)).toEqual("XVIII")
+    })
+
+    test("Should return LXX", () => {
+      const httpRequest =  {
+        query:  {
+          number: "70"
+        }
+      }
+      expect(intToRoman(httpRequest)).toEqual("LXX")
+    })
+
+    test("Should return LXXVII", () => {
+      const httpRequest =  {
+        query:  {
+          number: "77"
+        }
+      }
+      expect(intToRoman(httpRequest)).toEqual("LXXVII")
+    })
+
+    test("Should return XCIII", () => {
+      const httpRequest =  {
+        query:  {
+          number: "93"
+        }
+      }
+      expect(intToRoman(httpRequest)).toEqual("XCIII")
+    })
+
+    test("Should return XXI", () => {
+      const httpRequest =  {
+        query:  {
+          number: "21"
+        }
+      }
+      expect(intToRoman(httpRequest)).toEqual("XXI")
+    })
+
+    test("Should return LXVI", () => {
+      const httpRequest =  {
+        query:  {
+          number: "66"
+        }
+      }
+      expect(intToRoman(httpRequest)).toEqual("LXVI")
+    })
+})
