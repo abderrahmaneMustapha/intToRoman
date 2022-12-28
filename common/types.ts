@@ -1,7 +1,7 @@
 interface HttpRequest {
-  body?: any,
-  query?: any,
-  params?: any,
+  body?: object,
+  query?: object,
+  params?: object,
   ip?: string,
   method?: string,
   path?: string,
@@ -15,6 +15,6 @@ interface HttpRequest {
     'Referer': string,
     'User-Agent': string
   }
-};
+}
 
 export { HttpRequest }

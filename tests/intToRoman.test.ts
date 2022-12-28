@@ -1,4 +1,3 @@
-import { HttpRequest } from "../common/types";
 import intToRoman from "../useCases/convertion";
 
 describe("Should run", () => {

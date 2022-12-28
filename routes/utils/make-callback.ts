@@ -1,6 +1,7 @@
 import { HttpRequest } from "../../common/types";
 
-export default (controller: any) => (req: any, res: any) => {
+export default (controller: (httpReq: HttpRequest) => Promise<string>) => (req: Express.Request, res: Express.Response) => {
+
   const httpRequest: HttpRequest = {
     body: req.body,
     query: req.query,
@@ -21,7 +22,7 @@ export default (controller: any) => (req: any, res: any) => {
   };
 
   controller(httpRequest)
-    .then((httpResponse: any) => {
+    .then((httpResponse: Express.Response) => {
       res.set('Content-Type', 'application/json');
       res.type('json');
       const body = {
@@ -31,7 +32,7 @@ export default (controller: any) => (req: any, res: any) => {
       };
       res.status(200).send(body);
     })
-    .catch((e: any) => {
+    .catch((e: Error) => {
       console.log(e)
       res.status(400).send({
         success: false,
