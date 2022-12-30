@@ -1,6 +1,7 @@
 import { HttpRequest } from "../../common/types";
 
 const intToRoman = ({ query }: HttpRequest) => {
+  
   if (!query.number) {
     throw new Error('Number is missing');
   }
@@ -10,7 +11,7 @@ const intToRoman = ({ query }: HttpRequest) => {
   }
 
   let number = parseInt(query.number)
-
+  const NUMBER = number
   // 0 is not a supported number in the Roman numeral system.
   if (number > 100 || number <= 0 ) {
     throw new Error('Number must be between 0 and 100')
@@ -74,7 +75,7 @@ const intToRoman = ({ query }: HttpRequest) => {
           roman += "I";
       }
   }
-  return roman
+  return {roman, integer: NUMBER}
 };
 
 export default intToRoman

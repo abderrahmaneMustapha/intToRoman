@@ -24,8 +24,10 @@
     }
     #result {
       margin: 2em;
-      font-size: 2em;
+      font-size: 1.4em;
+      text-align: center;
       font-weight: bold;
+      max-width: 70%;
     }
   </style>
   <body>
@@ -55,25 +57,43 @@
 
     </div>
    <script>
+
+      // subscribe to the event and wait for the data
+      const events = new EventSource('/subscribe')
+      let subscriberId = ""
+      events.onmessage = (event) => {
+        console.log(event)
+        const data = JSON.parse(event.data);
+        if (data.subscriberId) {
+          subscriberId = data.subscriberId
+        }
+        if (data.roman && data.integer) {
+          result.innerText = data.integer+" is converted to Roman numeral and the result is "+ data.roman
+        }
+      };
+
+
+      // send data to the server
       const form = document.getElementsByTagName("form")[0]
       const result = document.getElementById("result")
 
       form.addEventListener("submit", (e) => {
         e.preventDefault();
-        fetch('/convertion?number='+e.target[0].value)
+        fetch('/convertion?number='+e.target[0].value+'&subscriberId='+subscriberId)
         .then(res => res.json())
         .then((data) => {
-          if (data.success === false) {
+          if (data.error && data.success === false) {
             result.innerText = data.error.description
           }
-          if(data.data && data.success == true) {
-            result.innerText = "The roman number is: "+data.data
+          if (data.data && data.success == true) {
+            result.innerText = data.data
           }
         })
         .catch((e) => {
           result.innerText = e.message
         })
       })
+
     </script>
   </body>
 </html>

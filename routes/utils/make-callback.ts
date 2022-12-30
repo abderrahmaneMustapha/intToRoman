@@ -1,7 +1,6 @@
 import { HttpRequest } from "../../common/types";
 
 export default (controller: (httpReq: HttpRequest) => Promise<string>) => (req: Express.Request, res: Express.Response) => {
-
   const httpRequest: HttpRequest = {
     body: req.body,
     query: req.query,
